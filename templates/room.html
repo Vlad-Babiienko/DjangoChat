@@ -83,6 +83,8 @@ setInterval(function(){
             {
                 var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
                 $("#display").append(temp);
+                temp=temp+1;
+                console.log(temp)
             }
         },
         error: function(response){
