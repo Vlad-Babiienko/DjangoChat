@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head><title>Click</title>
+<head><title>Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
   padding: 0 20px;
+  background-image:url(background.jpg);
+}
+
+.box{
+    background-color: red;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 
+.myMessage{
+    float:right;
+    background-color: blue;
+    margin: 5px 15px;
+    margin-left: 30%;
 
-.container {
+}
+.otherMessage{
+    float: left;
+    background-color: skyblue;
+    margin: 5px 15px;
+    margin-right: 30%;
+
+}
+/*.container {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-}
-
+}*/
+/*
 .darker {
   border-color: #ccc;
   background-color: #ddd;
-}
-
+}*/
+/*
 .container::after {
   content: "";
   clear: both;
@@ -52,13 +72,13 @@ body {
 .time-left {
   float: left;
   color: #999;
-}
+}*/
 </style>
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
 <body>
-
-<h2>{{room}}</h2>
+<a href='../'> Main </a>
+<h2>{{room}} - Chat room</h2>
 
 <div id="display">
 
@@ -81,9 +101,11 @@ setInterval(function(){
             $("#display").empty();
             for (var key in response.messages)
             {
-                var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
+                if(response.messages[key].user==`{{username}}`)
+                    var temp="<div class='box myMessage'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span>"+response.messages[key].date+"</span></div>";
+                else
+                    var temp="<div class='box otherMessage'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span>"+response.messages[key].date+"</span></div>";
                 $("#display").append(temp);
-                temp=temp+1;
                 console.log(temp)
             }
         },
@@ -96,7 +118,7 @@ setInterval(function(){
 </script>
 
 
-<div class="container">
+<div class="send">
     <style>
 
     input[type=text], select {
@@ -123,12 +145,18 @@ setInterval(function(){
     input[type=submit]:hover {
     background-color: #45a049;
     }
-
-    div {
+    .send {
+      border: 2px solid #dedede;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    /*div {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    }
+    }*/
     </style>
 
     <form id="post-form">
@@ -154,7 +182,7 @@ setInterval(function(){
           username:$('#username').val(),
           room_id:$('#room_id').val(),
           message:$('#message').val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+           csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function(data){
          //alert(data)

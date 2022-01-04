@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><title>Click</title>
+<head><title>Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -98,9 +98,9 @@ body {
         {% csrf_token %}
 
         <label>Room name</label>
-        <input type="text" name="username" id="username" width="100px" />
-        <label>Username</label>
         <input type="text" name="room_name" id="room_name" width="100px" />
+        <label>Username</label>
+        <input type="text" name="username" id="username" width="100px" />
         <input type="submit" value="Enter Room">
     </form>
 </div>
