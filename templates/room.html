@@ -149,7 +149,7 @@ $(document).ready(function(){
                                             key1=key;
 
                         }if(response.messages[key].user!=`{{username}}`)
-                        var notification = new Notification('Новое сообщение в чате',{ tag:"ache-mail",body: "От "+response.messages[key].user});
+                        function noty(){var notification = new Notification('Новое сообщение в чате',{ tag:"ache-mail",body: "От "+response.messages[key].user})}; noty();
 
                     },
                     error: function(response){
