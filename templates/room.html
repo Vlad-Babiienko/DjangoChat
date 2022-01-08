@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
+
     margin: 0;
     padding: 0;
     background-color: rgb(148, 167, 243);
@@ -18,13 +19,13 @@ body {
 .main{
     margin: 0 auto;
     max-width: 800px;
-    padding: 20px;
+
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 .box{
     background-color: red;
-    padding: 20px;
+    padding: 0px;
     border-radius: 20px;
 }
 
@@ -35,10 +36,8 @@ body {
     float:right;
     background-color: rgb(55, 62, 202);
     margin: 5px 15px;
-    margin-right: 8px;
-    margin-left: 40%;
+    margin-left: 50%;
     padding: 10px;
-    padding-left: 15px;
     border-bottom-right-radius: 0px;
 }
 .otherMessage{
@@ -56,14 +55,22 @@ body {
 .time{
     font-size:10px;
 }
+.end{
+    float:right;
+}
+.top{
+    float:right;
+}
 
 </style>
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
 <body>
+    
     <div class="main">
-<a href='../'> Main </a>  <a href="#end">В конец</a><a name="top"></a>
-<h2>{{room}} - Chat room</h2>
+<a href='../'> Main </a>  <a name="top"></a>   <a href="#end" class="end">В конец</a><br>
+
+<h2 align="center">{{room}} - Chat room</h2>
 
 <div id="display">
 
@@ -80,6 +87,7 @@ $(document).ready(function(){
     // переменная permission содержит результат запроса
     console.log('Результат запроса прав:', permission);
     });
+    Notification.requestPermission();
     $.ajax({
         type: 'GET',
         url : "/getMessages/{{room}}/",
@@ -126,7 +134,7 @@ $(document).ready(function(){
                                             key1=key;
 
                         }if(response.messages[key].user!=`{{username}}`)
-                        var notification = new Notification('Новое сообщение в чате',{ body: "От "+response.messages[key].user});
+                        var notification = new Notification('Новое сообщение в чате',{ url:"https//www.click.pythonanywhere.com/`{{room}}`/?username=`{{username}}`",body: "От "+response.messages[key].user});
 
                     },
                     error: function(response){
@@ -153,7 +161,7 @@ $(document).ready(function(){
     input[type=text], select {
     width: 100%;
     padding: 10px 10px;
-    margin: 8px 0;
+    margin: 5px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -181,9 +189,10 @@ $(document).ready(function(){
       border: 2px solid #dedede;
       background-color: rgb(188, 199, 182);
       border-radius: 5px;
-      padding: 0;
+      padding:0;
 
     }
+
     </style>
 
     <form id="post-form">
@@ -194,15 +203,19 @@ $(document).ready(function(){
         <input type="submit" value="Send">
     </form>
 </div>
-
+<br>
 <a  name= "end"></a>
-<a href="#top">На верх</a>
+<a href="#top" class="top">На верх</a>
 </div>
+<span id="date"></span>
 <footer class="footer">Modified by @the_sky_love_me :)
 </footer>
 </body>
 
 <script type="text/javascript">
+var date = new Date().getHours()+":"+ new Date().getMinutes();
+document.getElementById("date").value=date;
+
   $(document).on('submit','#post-form',function(e){
     e.preventDefault();
 
@@ -213,6 +226,7 @@ $(document).ready(function(){
           username:$('#username').val(),
           room_id:$('#room_id').val(),
           message:$('#message').val(),
+          date:$('#date').val(),
            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function(data){
