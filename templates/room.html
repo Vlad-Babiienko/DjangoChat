@@ -17,7 +17,7 @@ body {
     text-align: center;
 }
 .main{
-    margin: 0 auto;
+    margin: 10px auto;
     max-width: 800px;
 
     padding-bottom: 20px;
@@ -25,7 +25,7 @@ body {
 }
 .box{
     background-color: red;
-    padding: 0px;
+    padding:0;
     border-radius: 20px;
 }
 
@@ -44,7 +44,7 @@ body {
     float: left;
     background-color: skyblue;
     margin: 5px 15px;
-    margin-right: 50%;
+    margin-right: 40%;
     padding:10px;
     border-bottom-left-radius: 0px;
 }
@@ -61,12 +61,16 @@ body {
 .top{
     float:right;
 }
-
+@media(max-width:900px){
+    .main{
+        max-width: 700px;
+    }
+}
 </style>
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
 <body>
-    
+
     <div class="main">
 <a href='../'> Main </a>  <a name="top"></a>   <a href="#end" class="end">В конец</a><br>
 
@@ -189,7 +193,8 @@ $(document).ready(function(){
       border: 2px solid #dedede;
       background-color: rgb(188, 199, 182);
       border-radius: 5px;
-      padding:0;
+
+      margin-right:10px;
 
     }
 
