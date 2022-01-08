@@ -228,12 +228,13 @@ $(document).ready(function(){
 </body>
 
 <script type="text/javascript">
+function setTime(){
 var date = new Date().getHours()+":"+ new Date().getMinutes();
 document.getElementById("date").value=date;
-
+}
   $(document).on('submit','#post-form',function(e){
     e.preventDefault();
-
+    setTime();
     $.ajax({
       type:'POST',
       url:'/send',
