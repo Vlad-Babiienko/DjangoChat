@@ -44,7 +44,7 @@ body {
     float: left;
     background-color: skyblue;
     margin: 5px 15px;
-    margin-right: 40%;
+    margin-right: 50%;
     padding:10px;
     border-bottom-left-radius: 0px;
 }
@@ -100,7 +100,6 @@ body {
 <script>
 $(document).ready(function(){
     Notification.requestPermission(function(permission){
-    // переменная permission содержит результат запроса
     console.log('Результат запроса прав:', permission);
     });
     Notification.requestPermission();
@@ -150,7 +149,7 @@ $(document).ready(function(){
                                             key1=key;
 
                         }if(response.messages[key].user!=`{{username}}`)
-                        var notification = new Notification('Новое сообщение в чате',{ url:"https//www.click.pythonanywhere.com/`{{room}}`/?username=`{{username}}`",body: "От "+response.messages[key].user});
+                        var notification = new Notification('Новое сообщение в чате',{ tag:"ache-mail",body: "От "+response.messages[key].user});
 
                     },
                     error: function(response){
@@ -231,7 +230,10 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 function setTime(){
-var date = new Date().getHours()+":"+ new Date().getMinutes();
+var minutes = new Date().getMinutes();
+if(minutes<10)
+    minutes = "0"+minutes;
+var date = new Date().getHours()+":"+ minutes;
 document.getElementById("date").value=date;
 }
   $(document).on('submit','#post-form',function(e){
