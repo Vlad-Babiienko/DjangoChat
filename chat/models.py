@@ -9,3 +9,4 @@ class Message(models.Model):
     date = models.CharField(max_length=1000)
     user = models.CharField(max_length=1000000)
     room = models.CharField(max_length=1000000)
+    day = models.CharField(max_length=1000, default='.')

@@ -2,73 +2,142 @@
 <html>
 <head><title>Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous">
+</script>
 <style>
 body {
-
     margin: 0;
     padding: 0;
-    background-color: rgb(48, 127, 213);
+    background-color:green;
+    background-image:url(https://images.pexels.com/photos/1363876/pexels-photo-1363876.jpeg?cs=srgb&dl=pexels-travis-blessing-1363876.jpg&fm=jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
 }
-.footer{
+#display{
+    height:100%;
+}
+footer{
     height: 30px;
+    width:100%;
     padding-top: 5px;
     font-family: cursive;
     background-color: green;
     text-align: center;
+
 }
 .main{
     margin: 10px auto;
     max-width: 800px;
-
+    padding-top:10px;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    height:100%;
 }
 .box{
-    background-color: red;
     padding:0;
     border-radius: 20px;
 }
+.day{
 
+    margin: auto;
+    padding: auto;
+}
 .user{
     font-size:14px;
 }
 .myMessage{
-    float:right;
-    background-color: rgb(55, 62, 202);
+    float: right;
+    background-color: skyblue;
     margin: 5px 15px;
-    margin-left: 50%;
+    margin-left: 45%;
     padding: 10px;
     border-bottom-right-radius: 0px;
+    box-shadow: 0 2px 4px black;
 }
 .otherMessage{
     float: left;
-    background-color: skyblue;
+    background-color: rgb(12, 111, 189);
     margin: 5px 15px;
-    margin-right: 50%;
+    margin-right: 45%;
     padding:10px;
     border-bottom-left-radius: 0px;
+    box-shadow: 0 2px 4px black;
 }
 .text{
     margin:0;
-    font-size:20px;
+    font-size:15pt;
 }
 .time{
     font-size:10px;
+    float:right;
+    padding-top:5px;
 }
 .end{
+    font-size:2em;
     float:right;
     margin-right: 10px;
 }
 .top{
+    font-size:2em;
     float:right;
     margin-right: 10px;
 }
+.home{
+    font-size:2em;
+}
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+a:visited {
+  color: black;
+}
+.roomName{
+    background-color:rgb(23,52,25);
+    color:pink;
+    border-radius:10px;
+    width:50%;
+    margin:auto;
+    padding:auto;
+
+}
+.roomName1{
+    background-color:rgb(23,52,25);
+    color:pink;
+    border-radius:10px;
+    width:100%;
+    height:100%;
+    margin:auto;
+    margin-top:0px;
+    padding:auto;
+}
+.header{
+    display:flex;
+    width:100%;
+    background-color:green;
+    height:;
+    position:fixed;
+    padding-left:10px;
+    padding-right:10px;
+}
+
 @media(max-width:900px){
     .main{
         max-width: 700px;
     }
+    .otherMessage{
+        word-wrap: break-word;
+        max-width:80%;
+    }
 }
 @media(max-width:700px){
+   .text{
+       font-size:14pt;
+   }
     .main{
         max-width: 600px;
     }
@@ -77,23 +146,59 @@ body {
     .main{
         max-width: 500px;
     }
+
+
+}
+#settings{
+    position:fixed;
+    margin-top:30px;
+    float:left;
+    display:none;
 }
 </style>
-<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
-<body>
 
-    <div class="main">
-.       <a href='../'>     Main </a>  <a name="top"></a>   <a href="#end" class="end">В конец</a><br>
+<body id="body">
+    <div class="header"><a  href='../' class="home"> ◀ </a>
 
-<h2 align="center">{{room}} - Chat room</h2>
+
+<h2 class="roomName" align="center" ><input type="button"  class="roomName1" onclick="openSettings()" value={{room}}></h2>
+
+<a href="#end" class="end">🔻</a>
+</div>
+
+<div id='settings'>
+    <input type="button" onclick="changePict(Pict1)" value="Pict1">
+    <input type="button" onclick="changePict(Pict2)" value="Pict2">
+    <input type="button" onclick="changePict(Pict3)" value="Pict3">
+    <input type="button" onclick="changePict(Pict4)" value="Pict4">
+    <input type="button" onclick="changePict(Pict5)" value="Pict5">
+    <input type="button" onclick="changePict(Pict6)" value="Pict6">
+</div>
+
+<script>
+function openSettings(){
+    var ele = document.getElementById("settings");
+        if (ele.style.display == "none")
+            ele.style.display = "block";
+        else
+            ele.style.display = "none";
+}
+
+var Pict1 = "url('https://chrismartinphotography.files.wordpress.com/2013/10/calm-on-lake-macdonald-c2a9-christopher-martin-2325.jpg')";
+var Pict2 = "url('https://searchthisweb.com/wallpaper/smoke_3840x2160_522oh.jpg')";
+var Pict3 = "url('https://thumbs.gfycat.com/AthleticSimpleHuemul-size_restricted.gif')";
+var Pict4 = "url('https://img.wallpapersafari.com/desktop/1280/1024/16/84/tqrVdL.jpg')";
+var Pict5 = "url('https://i.gifer.com/origin/77/7727ea4056b541f71813b11bbbb710e4.gif')";
+var Pict6 = "url('https://krot.info/uploads/posts/2021-03/1614961239_3-p-kuryashchaya-anime-tyan-art-kartinki-3.jpg')";
+function changePict(Pict) {
+    var elem = document.getElementById("body");
+    elem.style.backgroundImage = Pict;
+  }
+</script>
+  <a  name="top"></a>  <div class="main">
 
 <div id="display">
-
-<!-- <div class="container darker">
-  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
-  <span class="time-left">20th, April 2021</span>
-</div> -->
 
 </div>
 
@@ -112,9 +217,10 @@ $(document).ready(function(){
             for (var key in response.messages)
             {
                 if(response.messages[key].user==`{{username}}`)
-                var temp="<div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                var temp="</div><div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
             else
                 var temp="<div class='box otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+
                 $("#display").append(temp);
                 console.log(temp)
                 key1=key;
@@ -140,20 +246,20 @@ $(document).ready(function(){
                                     for (var key in response.messages)
                                     {
                                         if(response.messages[key].user==`{{username}}`)
-                                            var temp="<div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
-                                        else
-                                            var temp="<div class='box otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                                        var temp="<div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                                    else
+                                        var temp="<div class='box otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
 
                                             $("#display").append(temp);
                                             console.log(temp)
                                             key1=key;
 
                         }if(response.messages[key].user!=`{{username}}`)
-                        function noty(){var notification = new Notification('Новое сообщение в чате',{ tag:"ache-mail",body: "От "+response.messages[key].user})}; noty();
+                        var notification = new Notification('Новое сообщение в чате',{body: "От "+response.messages[key].user});
 
                     },
                     error: function(response){
-                        alert('An error occured')
+                        alert('Упс... Ошибочка:)')
                     }
                 });
             }
@@ -162,7 +268,7 @@ $(document).ready(function(){
             },1000);
         },
         error: function(response){
-            alert('An error occured')
+            alert('Упс... Ошибочка:)')
         }
     });
 })
@@ -178,9 +284,11 @@ $(document).ready(function(){
     padding: 10px 10px;
     margin: 5px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 0.5px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    box-shadow: 0 1px 4px black;
+    word-wrap: break-word;
     }
 
     input[type=submit] {
@@ -192,20 +300,23 @@ $(document).ready(function(){
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    box-shadow: 0 1px 4px black;
     }
 
     input[type=submit]:hover {
     background-color: #45a049;
+    word-wrap: break-word;
     }
     .send {
+        position:;
       max-width: 800px;
       width:100%;
       bottom: 2px;
 
-      background-color: rgb(148, 167, 243);
+      background-color: none /*rgb(148, 167, 243)*/;
       border-radius: 5px;
 
-      margin-right:10px;
+      margin-right:;
 
     }
 
@@ -219,12 +330,14 @@ $(document).ready(function(){
         <input type="submit" value="Send">
     </form>
 </div>
+<div id="typping"> </div>
 <br>
 <a  name= "end"></a>
-<a href="#top" class="top">На верх</a>
+<a href="#top" class="top">🔺</a>
 </div>
 <span id="date"></span>
-<footer class="footer">Modified by @the_sky_love_me :)
+<span id="day"></span>
+<footer>Modified by @the_sky_love_me :)
 </footer>
 </body>
 
@@ -236,9 +349,25 @@ if(minutes<10)
 var date = new Date().getHours()+":"+ minutes;
 document.getElementById("date").value=date;
 }
+function setDate(){
+var mounth = new Date().toLocaleString('ukr', { month: 'long' });
+var day = new Date().getDate() + " "+ mounth.slice(0, -3)+"ня";
+document.getElementById("day").innerHTML = day;
+document.getElementById("day").value = day;
+}
+message.addEventListener('keydown', logKey);
+
+ function logKey(e) {
+   if(e.code=='space')
+   {document.getElementById("typping").innerHTML="Typping"}
+   if(e.code!="")
+   {document.getElementById("typping").innerHTML=" "}}
+
   $(document).on('submit','#post-form',function(e){
+
     e.preventDefault();
     setTime();
+    setDate();
     $.ajax({
       type:'POST',
       url:'/send',
@@ -247,6 +376,7 @@ document.getElementById("date").value=date;
           room_id:$('#room_id').val(),
           message:$('#message').val(),
           date:$('#date').val(),
+          day:$('#day').val(),
            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       },
       success: function(data){
@@ -256,6 +386,7 @@ document.getElementById("date").value=date;
     document.getElementById('message').value = ''
 
   });
+
 </script>
 
 </html>

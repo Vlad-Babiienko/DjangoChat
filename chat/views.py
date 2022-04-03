@@ -32,9 +32,10 @@ def send(request):
     username = request.POST['username']
     room_id = request.POST['room_id']
     date = request.POST['date']
-    
-    new_message = Message.objects.create(value=message, user=username, room=room_id, date=date)
-    new_message.save()
+    day = request.POST['day']
+    if message != "" and message != " ":
+        new_message = Message.objects.create(value=message, user=username, room=room_id, date=date, day=day)
+        new_message.save()
     return HttpResponse('Message sent successfully')
 
 def getMessages(request, room):
