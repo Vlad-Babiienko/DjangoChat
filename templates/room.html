@@ -4,8 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous">
-</script>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
 <style>
 body {
     margin: 0;
@@ -36,10 +36,7 @@ footer{
     margin-bottom: 20px;
     height:100%;
 }
-.box{
-    padding:0;
-    border-radius: 20px;
-}
+
 .day{
 
     margin: auto;
@@ -48,21 +45,23 @@ footer{
 .user{
     font-size:14px;
 }
-.myMessage{
+#myMessage{
     float: right;
     background-color: skyblue;
+    border-radius: 20px;
     margin: 5px 15px;
     margin-left: 45%;
     padding: 10px;
     border-bottom-right-radius: 0px;
     box-shadow: 0 2px 4px black;
 }
-.otherMessage{
+#otherMessage{
     float: left;
     background-color: rgb(12, 111, 189);
     margin: 5px 15px;
     margin-right: 45%;
     padding:10px;
+    border-radius: 20px;
     border-bottom-left-radius: 0px;
     box-shadow: 0 2px 4px black;
 }
@@ -177,6 +176,7 @@ a:visited {
 </div>
 
 <script>
+
 function openSettings(){
     var ele = document.getElementById("settings");
         if (ele.style.display == "none")
@@ -217,16 +217,15 @@ $(document).ready(function(){
             for (var key in response.messages)
             {
                 if(response.messages[key].user==`{{username}}`)
-                var temp="</div><div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                var temp="<div   id='myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
             else
-                var temp="<div class='box otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                var temp="<div id='otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
 
                 $("#display").append(temp);
                 console.log(temp)
                 key1=key;
             }
             setInterval(function(){
-
                 $.ajax({
                     type: 'GET',
                     url : "/getMessages/{{room}}/",
@@ -246,9 +245,9 @@ $(document).ready(function(){
                                     for (var key in response.messages)
                                     {
                                         if(response.messages[key].user==`{{username}}`)
-                                        var temp="<div class='box myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                                        var temp="<div id='myMessage'><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
                                     else
-                                        var temp="<div class='box otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
+                                        var temp="<div id='otherMessage'><b class='user'>"+response.messages[key].user+"</b><p class='text'>"+response.messages[key].value+"</p><span class='time'>"+response.messages[key].date+"</span></div>";
 
                                             $("#display").append(temp);
                                             console.log(temp)
@@ -265,6 +264,7 @@ $(document).ready(function(){
                             var n = new Notification(title, options);
                         }
                         spawnNotification();
+                        
                     },
                     error: function(response){
                         alert('Упс... Ошибочка:)')
@@ -280,7 +280,11 @@ $(document).ready(function(){
         }
     });
 })
+myMessage.onclick= function info(){
+    alert('n');
+};
 
+otherMessage.addEventListener('click', info);
 </script>
 
 
@@ -394,6 +398,7 @@ message.addEventListener('keydown', logKey);
     document.getElementById('message').value = ''
 
   });
+
 
 </script>
 
