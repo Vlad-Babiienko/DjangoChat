@@ -21,7 +21,7 @@ def checkview(request):
     if username=="":
         username="anonymous"
     if Room.objects.filter(name=room).exists():
-        return redirect('/'+room+'/?username='+username)
+        return redirect('/'+room+'/?username='+username+'#end')
     else:
         new_room = Room.objects.create(name=room)
         new_room.save()
